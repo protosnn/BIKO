@@ -29,15 +29,15 @@
     class="flex h-screen bg-gray-50 dark:bg-gray-900"
     :class="{ 'overflow-hidden': isSideMenuOpen }">
     <!-- Desktop sidebar -->
-    <?php include '../sidebar.php'; ?>
+    <?php include 'sidebar_siswa.php'; ?>
     <div class="flex flex-col flex-1 w-full">
       <!-- Header -->
-      <?php include '../header.php'; ?>
+      <?php include 'header_siswa.php'; ?>
       <main class="h-full overflow-y-auto">
         <div class="container px-6 mx-auto grid">
           <h2
             class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Dashboard Admin
+            Dashboard Siswa
           </h2>
           <!-- CTA -->
           <a
@@ -51,86 +51,209 @@
                 <path
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
               </svg>
-              <span>Selamat Datang Mas Admin</span>
+              <span>Selamat Datang Mas Murid</span>
             </div>
           </a>
           <!-- Cards -->
           <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
             <!-- Card -->
-            <div
-              class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <div class="group relative h-96 w-72 [perspective:1000px]">
               <div
-                class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                </svg>
-              </div>
-              <div>
-                <p
-                  class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                  Total Murid
-                </p>
-                <p
-                  class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                  6389
-                </p>
+                class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]"
+              >
+                <div
+                  class="absolute w-full h-full rounded-xl bg-red-500 p-6 text-white [backface-visibility:hidden]"
+                >
+                  <div class="flex flex-col h-full">
+                    <div class="flex justify-between items-start">
+                      <div class="text-3xl font-bold">Pelanggaran</div>
+                      <div class="text-5xl">🙅🏻‍♂️</div>
+                    </div>
+                    <div class="mt-4">
+                      <p class="text-lg">
+                        Total Pelanggaran yang sudah kamu buat <br>
+                        <p class="text-gray-200 text-sm">
+                        <i>Jangan pernah mengulanginya lagi <b>🫵🏻</b></i>
+                        </p>
+                      </p>
+                    </div>
+                    <div class="mt-auto">
+                      <p class="text-sm opacity-75">Hover to flip!</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="absolute w-full h-full rounded-xl bg-red-500 p-6 text-white [transform:rotateX(180deg)] [backface-visibility:hidden]"
+                >
+                  <div class="flex flex-col h-full">
+                    <h1 class="text-2xl oldstyle-nums  text-center py-35 font-black mb-4"><b>120</b></h1>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- Card -->
-            <div
-              class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+           <div class="group relative h-96 w-72 [perspective:1000px]">
               <div
-                class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                    clip-rule="evenodd"></path>
-                </svg>
-              </div>
-              <div>
-                <p
-                  class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                  Pelanggaran yang dibuat
-                </p>
-                <p
-                  class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                   46,760.89
-                </p>
+                class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]"
+              >
+                <div
+                  class="absolute w-full h-full rounded-xl bg-yellow-500 p-6 text-white [backface-visibility:hidden]"
+                >
+                  <div class="flex flex-col h-full">
+                    <div class="flex justify-between items-start">
+                      <div class="text-3xl font-bold">Konsultasi</div>
+                      <div class="text-5xl">✒️</div>
+                    </div>
+                    <div class="mt-4">
+                      <p class="text-lg">
+                        Total konsultasi kamu dengan bapak/ibu konseler yang sudah kamu buat <br>
+                        <p class="text-gray-200 text-sm">
+                        <i>Kalau ada apa-apa jangan sungkan buat cerita ya 🫶🏼</i>
+                        </p>
+                      </p>
+                    </div>
+                    <div class="mt-auto">
+                      <p class="text-sm opacity-75">Hover to flip!</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="absolute w-full h-full rounded-xl bg-yellow-500 p-6 text-white [transform:rotateX(180deg)] [backface-visibility:hidden]"
+                >
+                  <div class="flex flex-col h-full">
+                    <h1 class="text-2xl oldstyle-nums  text-center py-35 font-black mb-4"><b>120</b></h1>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- Card -->
-            <div
-              class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <div class="group relative h-96 w-72 [perspective:1000px]">
               <div
-                class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                    clip-rule="evenodd"></path>
-                </svg>
-              </div>
-              <div>
-                <p
-                  class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                  Konsultasi yangdibuat
-                </p>
-                <p
-                  class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                  35
-                </p>
+                class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]"
+              >
+                <div
+                  class="absolute w-full h-full rounded-xl bg-green-500 p-6 text-white [backface-visibility:hidden]"
+                >
+                  <div class="flex flex-col h-full">
+                    <div class="flex justify-between items-start">
+                      <div class="text-3xl font-bold">Laporan</div>
+                      <div class="text-5xl">🗣</div>
+                    </div>
+                    <div class="mt-4">
+                      <p class="text-lg">
+                        Total Pelanggaran siswa lain yang sudah kamu laporkan ke para bapak/ibu konseler <br>
+                        <p class="text-gray-200 text-sm">
+                        <i>Jangan pernah takut buat ngelaporin pelangaaran yang udah dilakukan oleh temen-temen👏🏼</i>
+                        </p>
+                      </p>
+                    </div>
+                    <div class="mt-auto">
+                      <p class="text-sm opacity-75">Hover to flip!</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="absolute w-full h-full rounded-xl bg-green-500 p-6 text-white [transform:rotateX(180deg)] [backface-visibility:hidden]"
+                >
+                  <div class="flex flex-col h-full">
+                    <h1 class="text-2xl oldstyle-nums  text-center py-35 font-black mb-4"><b>120</b></h1>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <!-- End Cards -->
+           <!-- Section Motiivasi -->
+            <h1 class="text-2xl text-white font-semibold ">Motivasi</h1>
+          <div
+            class="flex flex-col gap-2 dark:text-white  w-full bg-white dark:bg-neutral-900 p-5 rounded-md mt-2 shadow-md mb-8"
+            >
+            <div class="flex flex-row justify-between w-full">
+              <div class="flex flex-row justify-between w-full">
+                <div
+                  class="bg-gray-200 dark:bg-neutral-700 rounded-md w-20 h-4 animate-pulse"
+                ></div>
+                <div
+                  class="bg-gray-200 dark:bg-neutral-700 rounded-md w-10 animate-pulse"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-row justify-between w-full">
+              <div
+                class="bg-gray-200 dark:bg-neutral-700 rounded-md w-40 animate-pulse"
+              ></div>
 
+              <div class="text-xs">
+                <div class="flex flex-row">
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    class="h-4 w-4 text-yellow-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.916 1.603-.916 1.902 0l1.286 3.953a1.5 1.5 0 001.421 1.033h4.171c.949 0 1.341 1.154.577 1.715l-3.38 2.458a1.5 1.5 0 00-.54 1.659l1.286 3.953c.3.916-.757 1.67-1.539 1.145l-3.38-2.458a1.5 1.5 0 00-1.76 0l-3.38 2.458c-.782.525-1.838-.229-1.539-1.145l1.286-3.953a1.5 1.5 0 00-.54-1.659l-3.38-2.458c-.764-.561-.372-1.715.577-1.715h4.171a1.5 1.5 0 001.421-1.033l1.286-3.953z"
+                    ></path>
+                  </svg>
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    class="h-4 w-4 text-yellow-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.916 1.603-.916 1.902 0l1.286 3.953a1.5 1.5 0 001.421 1.033h4.171c.949 0 1.341 1.154.577 1.715l-3.38 2.458a1.5 1.5 0 00-.54 1.659l1.286 3.953c.3.916-.757 1.67-1.539 1.145l-3.38-2.458a1.5 1.5 0 00-1.76 0l-3.38 2.458c-.782.525-1.838-.229-1.539-1.145l1.286-3.953a1.5 1.5 0 00-.54-1.659l-3.38-2.458c-.764-.561-.372-1.715.577-1.715h4.171a1.5 1.5 0 001.421-1.033l1.286-3.953z"
+                    ></path>
+                  </svg>
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    class="h-4 w-4 text-yellow-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.916 1.603-.916 1.902 0l1.286 3.953a1.5 1.5 0 001.421 1.033h4.171c.949 0 1.341 1.154.577 1.715l-3.38 2.458a1.5 1.5 0 00-.54 1.659l1.286 3.953c.3.916-.757 1.67-1.539 1.145l-3.38-2.458a1.5 1.5 0 00-1.76 0l-3.38 2.458c-.782.525-1.838-.229-1.539-1.145l1.286-3.953a1.5 1.5 0 00-.54-1.659l-3.38-2.458c-.764-.561-.372-1.715.577-1.715h4.171a1.5 1.5 0 001.421-1.033l1.286-3.953z"
+                    ></path>
+                  </svg>
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    class="h-4 w-4 text-yellow-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.916 1.603-.916 1.902 0l1.286 3.953a1.5 1.5 0 001.421 1.033h4.171c.949 0 1.341 1.154.577 1.715l-3.38 2.458a1.5 1.5 0 00-.54 1.659l1.286 3.953c.3.916-.757 1.67-1.539 1.145l-3.38-2.458a1.5 1.5 0 00-1.76 0l-3.38 2.458c-.782.525-1.838-.229-1.539-1.145l1.286-3.953a1.5 1.5 0 00-.54-1.659l-3.38-2.458c-.764-.561-.372-1.715.577-1.715h4.171a1.5 1.5 0 001.421-1.033l1.286-3.953z"
+                    ></path>
+                  </svg>
+
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    class="h-4 w-4 text-yellow-200"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.049 2.927c.3-.916 1.603-.916 1.902 0l1.286 3.953a1.5 1.5 0 001.421 1.033h4.171c.949 0 1.341 1.154.577 1.715l-3.38 2.458a1.5 1.5 0 00-.54 1.659l1.286 3.953c.3.916-.757 1.67-1.539 1.145l-3.38-2.458a1.5 1.5 0 00-1.76 0l-3.38 2.458c-.782.525-1.838-.229-1.539-1.145l1.286-3.953a1.5 1.5 0 00-.54-1.659l-3.38-2.458c-.764-.561-.372-1.715.577-1.715h4.171a1.5 1.5 0 001.421-1.033l1.286-3.953z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-gray-200 dark:bg-neutral-700 rounded-md w-full h-20 animate-pulse"
+            ></div>
+          </div>
+          <!-- End Section Motiivasi -->
           <!-- New Table -->
-           <h4
-              class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+           <h1
+              class="mb-4 text-2xl font-bold text-gray-600 dark:text-gray-300"
             >
               Data terbaru
-            </h4>
+            </h1>
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
