@@ -133,24 +133,27 @@
             Tambah Data Jenis Pelanggaran
           </p>
           <!-- Modal description -->
-          <form action="" method="post">
+          <form action="proses/proses_tambah_jenispelanggaran.php" method="post">
             <input
+              name="nama"
               type="text"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Nama"
+              placeholder="Masukan Nama Pelanggaran"
             />
             <input
+              name="poin"
               type="number"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Masukan Poin"
             />
             <select
+                  name="status"
                   class="block mb-4 w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                 >
                   <option disabled>Status Pelanggaran</option>
-                  <option>Ringan</option>
-                  <option>Sedang</option>
-                  <option>Berat</option>
+                  <option value="ringan">Ringan</option>
+                  <option value="sedang">Sedang</option>
+                  <option value="berat">Berat</option>
                 </select>
             <footer
           class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"

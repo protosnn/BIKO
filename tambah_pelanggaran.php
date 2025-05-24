@@ -133,23 +133,26 @@
             Tambah Data laporan Pelanggaran
           </p>
           <!-- Modal description -->
-          <form action="" method="post">
+          <form action="proses/proses_tambah_pelanggaran.php" method="post">
             <input
+              name="nama_siswa"
               type="text"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Nama Siswa"
+              placeholder="Masukan Nama Siswa Yang Melanggar"
             />
             <input
               type="text"
+              name="pelapor"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Pelapor"
-            />
+              placeholder="Jika berkenan masukan nama jika tidak ketik anonymous"/>
             <input
+              name="jenis_pelanggaran"
               type="text"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Pelanggaran yang dilakukan"
             />
             <input
+              name="bukti"
               type="file"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Masukan bukti"
