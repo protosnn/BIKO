@@ -21,6 +21,8 @@
     defer></script>
   <script src="./assets/js/charts-lines.js" defer></script>
   <script src="./assets/js/charts-pie.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
 
 <body>
@@ -44,32 +46,38 @@
             <div
               class="w-full px-4 py-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
             >
-              <p class="mb-4 text-gray-600 dark:text-gray-400">
-                This is possibly
-                <strong>the most accessible a modal can get</strong>
-                , using JavaScript. When opened, it uses
-                <code>assets/js/focus-trap.js</code>
-                to create a
-                <em>focus trap</em>
-                , which means that if you use your keyboard to navigate around,
-                focus won't leak to the elements behind, staying inside the
-                modal in a loop, until you take any action.
-              </p>
+              <!-- From Uiverse.io by Javierrocadev --> 
+              <div
+                class="relative rounded-lg w-full mb-2 -skew-x-6 -translate-y-2 -translate-y-6 hover:-translate-y-1 hover:-translate-x-0 hover:skew-x-0 duration-500 w-72 h-44 p-2 bg-neutral-50 card-compact hover:bg-base-200 transition-all duration-200 [box-shadow:12px_12px] hover:[box-shadow:4px_4px]"
+              >
+                <figure class="w-full h-full">
+                  <div
+                    alt="change to a img tag"
+                    class="bg-orange-500 text-neutral-50 min-h-full rounded-lg border border-opacity-5"
+                  ></div>
+                </figure>
+                <div class="absolute text-neutral-50 bottom-4 left-0 px-4">
+                  <span class="font-bold">Tambahkan Data Jenis Pelanggaran</span>
+                  <p class="text-sm opacity-60 line-clamp-2">
+                    Untuk menambahkan data jenis pelanggaran baru yang akan digunakan untuk keperluan semuanya, dan ditampilkan di table di bawah ini
+                  </p>
+                </div>
+              </div>
+
 
               <p class="text-gray-600 dark:text-gray-400">
-                Also, on small screens it is placed at the bottom of the screen,
-                to account for larger devices and make it easier to click the
-                larger buttons.
+               <b> <i> Untuk mengedit dan menghapus data jenis pelanggaran dapat dilakukan di table bagian action. </i> </b>
               </p>
             </div>
             <div>
               <button
                 @click="openModal"
-                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                class="px-4 py-2 text-sm font-medium leading-5 w-full text-white font-2xl text-center h-17 font-bold transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
               >
-                Tambahkan data Konseler
+                Tambahkan data jenis pelanggaran
               </button>
             </div>
+          </div>
           </div>
           <div
       x-show="isModalOpen"

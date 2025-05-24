@@ -134,12 +134,19 @@
           </p>
           <!-- Modal description -->
           <form action="proses/proses_tambah_pelanggaran.php" method="post">
-            <input
-              name="nama_siswa"
-              type="text"
-              class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Nama Siswa Yang Melanggar"
-            />
+            <select
+                  name="nama_siswa"  
+                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                >
+                  <option disabled><strong>Nama Siswa</strong></option>
+                  <?php
+                  include 'koneksi.php';
+                  $query = mysqli_query($db, "SELECT * FROM siswa");
+                  while ($data = mysqli_fetch_array($query)) {
+                    echo "<option value='" . $data['siswa_id'] . "'>" . $data['nama'] . "</option>";
+                  }
+                  ?>
+                </select>
             <input
               type="text"
               name="pelapor"
