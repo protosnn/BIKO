@@ -133,39 +133,46 @@
             Tambah Data Siswa
           </p>
           <!-- Modal description -->
-          <form action="" method="post">
+          <form action="proses/proses_tambah_siswa.php" method="post">
             <input
               type="text"
+              name="nama"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Masukan Nama"
             />
             <input
               type="text"
+              name="username"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Masukan Username"
             />
             <input
               type="password"
+              name="password"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Masukan Password"
             /> 
             <select
+            name="jkel"
                   class="block mb-4 w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                 >
                   <option disabled>Jenis Kelamin</option>
-                  <option>Laki-Laki</option>
-                  <option>Perempuan</option>
+                  <option value="laki-laki" >Laki-Laki</option>
+                  <option value="perempuan">Perempuan</option>
                 </select>
             <select
+            name="kelas"  
                   class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                 >
                   <option disabled><strong>Kelas</strong></option>
-                  <option>XI-PPLG</option>
-                  <option>XI-TJKT</option>
-                  <option>XI-BUSANA</option>
-                  <option>XI-PERFILMAN</option>
+                  <option value="XI-PPLG" >XI-PPLG</option>
+                  <option value="XI-TJKT">XI-TJKT</option>
+                  <option value="XI-BUSANA">XI-BUSANA</option>
+                  <option value="XI-PERFILEMAN">XI-PERFILMAN</option>
                 </select>
             <input
+              type="text"
+              name="ortu"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Masukan Nama Orang Tua"
             />
