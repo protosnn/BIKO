@@ -35,10 +35,50 @@
       <?php include 'header_siswa.php'; ?>
       <main class="h-full overflow-y-auto">
         <div class="container px-6 mx-auto grid">
-          <h2
-            class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Data Laporan Pelanggaran 
-          </h2>
+          <!-- Hero Section -->
+          <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
+            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+               Halaman pelaporan pelanggaran siswa
+            </h2>
+            <div class="relative bg-gradient-to-r from-red-600 to-red-800 text-white rounded-lg p-6 overflow-hidden">
+              
+              <!-- Content -->
+              <div class="relative z-10 md:flex items-center justify-between">
+                <div class="md:w-2/3 mb-6 md:mb-0">
+                  <h3 class="text-2xl font-bold mb-2">Laporkan Pelanggaran Tata Tertib</h3>
+                  <p class="text-purple-100 mb-4">
+                    Bantu kami menjaga ketertiban sekolah dengan melaporkan pelanggaran yang terjadi. 
+                    Setiap laporan akan ditangani dengan bijak dan rahasia pelapor akan dijaga.
+                  </p>
+                  <div class="flex flex-wrap gap-4 text-sm">
+                    <div class="flex items-center">
+                      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                      </svg>
+                      Identitas Terjaga
+                    </div>
+                    <div class="flex items-center">
+                      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                      </svg>
+                      Proses Cepat
+                    </div>
+                    <div class="flex items-center">
+                      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                      </svg>
+                      Kerahasiaan Terjamin
+                    </div>
+                  </div>
+                </div>
+                <div class="md:w-1/3 flex justify-center">
+                  <img src="../assets/img/pelanggaran.jpg" alt="Pelaporan" class="w-40 h-40 object-contain">
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Modal -->
           <div class="gap-6 mb-8 "> 
           <div>
@@ -75,7 +115,7 @@
             <div>
               <button
                 @click="openModal"
-                class="px-4 py-2 text-sm font-medium leading-5 w-full text-white font-2xl text-center h-17 font-bold transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                class="px-4 py-2 text-sm font-medium leading-5 w-full text-white font-2xl text-center h-17 font-bold transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-800 focus:outline-none focus:shadow-outline-red"
               >
                 Tambahkan data laporan pelanggaran
               </button>
@@ -137,25 +177,44 @@
             Tambah Data laporan Pelanggaran
           </p>
           <!-- Modal description -->
-          <form action="proses/proses_tambah_pelanggaran.php" method="post">
+          <form action="../proses/proses_tambah_pelanggaran.php" method="post">
             <select
                   name="nama_siswa"  
                   class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                 >
                   <option disabled><strong>Nama Siswa</strong></option>
-                  <option><strong>Nama Siswa</strong></option>
+                  <option>
+                    <?php
+                    include '../koneksi.php';
+                    $query = "SELECT nama FROM siswa";
+                    $result = mysqli_query($db, $query);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<option value='" . htmlspecialchars($row['nama']) . "'>" . htmlspecialchars($row['nama']) . "</option>";
+                    }
+                    ?>
+                  </option>
                 </select>
             <input
               type="text"
               name="pelapor"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Jika berkenan masukan nama jika tidak ketik anonymous"/>
-            <input
-              name="jenis_pelanggaran"
-              type="text"
-              class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Pelanggaran yang dilakukan"
-            />
+            <select
+                  name="jenis_pelanggaran"  
+                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                >
+                  
+                  <option disabled><strong>jenis_pelanggaran</strong></option>
+                  <?php
+                  include '../koneksi.php';
+                  $query = "SELECT id, nama FROM jenis_pelanggaran";
+                  $result = mysqli_query($db, $query);
+                  echo '<option disabled selected><strong>jenis_pelanggaran</strong></option>';
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['nama']) . "</option>";
+                  }
+                  ?>
+                </select>
             <input
               name="bukti"
               type="file"
@@ -172,9 +231,9 @@
             Cancel
           </button>
           <button
-            class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+            class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple"
           >
-            Tambah
+            Laporkan
           </button>
         </footer>
           </form>
@@ -189,5 +248,3 @@
     </div>
   </div>
 </body>
-
-</html>

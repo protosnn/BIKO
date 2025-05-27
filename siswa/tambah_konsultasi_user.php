@@ -21,7 +21,72 @@
     defer></script>
   <script src="../assets/js/charts-lines.js" defer></script>
   <script src="../assets/js/charts-pie.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+      <style>
+        .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 9999 !important;
+            background: white;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06);
+        }
+        .ui-menu-item {
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.2s ease;
+        }
+        .ui-menu-item:last-child {
+            border-bottom: none;
+        }
+        .ui-menu-item:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+            cursor: pointer;
+        }
+        .ui-state-active,
+        .ui-widget-content .ui-state-active {
+            background: linear-gradient(to right, #2563eb, #3b82f6) !important;
+            border: none !important;
+            color: white !important;
+        }
+        .ui-helper-hidden-accessible {
+            display: none;
+        }
+        /* Custom input styling */
+        .custom-input {
+            background-color: solid gray;
+            opacity: 50%;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: white;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        .custom-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .custom-input::placeholder {
+            color: #94a3b8;
+        }
+        .dark .custom-input {
+            background-color: #1f2937;
+            border-color: rgba(59, 130, 246, 0.2);
+            color: white;
+        }
+        .dark .custom-input:focus {
+            border-color: #3b82f6;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,6 +104,53 @@
             class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Data Konsultasi Siswa 
           </h2>
+
+          <!-- Hero Section -->
+          <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
+            <div class="relative bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-lg p-8 overflow-hidden">
+              <!-- Decorative circles -->
+              <div class="absolute top-0 right-0 -mt-4 -mr-4">
+                <div class="w-32 h-32 rounded-full bg-purple-500 opacity-20"></div>
+              </div>
+              <div class="absolute bottom-0 left-0 -mb-4 -ml-4">
+                <div class="w-24 h-24 rounded-full bg-indigo-500 opacity-20"></div>
+              </div>
+
+              <!-- Content -->
+              <div class="relative z-10 md:flex items-center justify-between">
+                <div class="md:w-2/3 mb-6 md:mb-0">
+                  <h3 class="text-2xl font-bold mb-4">Layanan Konsultasi BK Online</h3>
+                  <p class="text-purple-100 mb-6 text-lg leading-relaxed">
+                    Jangan ragu untuk berbagi cerita dan mencari solusi. Guru BK siap membantu Anda mengatasi berbagai tantangan akademik, sosial, atau pribadi dengan penuh empati dan profesional.
+                  </p>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="flex items-center bg-white/10 rounded-lg p-3">
+                      <svg class="w-6 h-6 mr-2 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                      </svg>
+                      <span>100% Privasi Terjamin</span>
+                    </div>
+                    <div class="flex items-center bg-white/10 rounded-lg p-3">
+                      <svg class="w-6 h-6 mr-2 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Respon Cepat</span>
+                    </div>
+                    <div class="flex items-center bg-white/10 rounded-lg p-3">
+                      <svg class="w-6 h-6 mr-2 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                      <span>Konselor Profesional</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="md:w-1/3 flex justify-center items-center">
+                  <img src="../assets/img/konsultasi.png" alt="Konsultasi" class="w-64 h-64 object-contain drop-shadow-xl">
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Modal -->
           <div class="gap-6 mb-8 "> 
 <div>
@@ -52,27 +164,28 @@
                 <figure class="w-full h-full">
                   <div
                     alt="change to a img tag"
-                    class="bg-blue-500 text-neutral-50 min-h-full rounded-lg border border-opacity-5"
+                    class="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-neutral-50 min-h-full rounded-lg border border-opacity-5"
                   ></div>
                 </figure>
                 <div class="absolute text-neutral-50 bottom-4 left-0 px-4">
-                  <span class="font-bold">Tambahkan Data Konsultasi Siswa</span>
+                  <span class="font-bold">Buat konsultasi sekarang juga!!!</span>
                   <p class="text-sm opacity-60 line-clamp-2">
-                     Halaman ini digunakan untuk mngatur segala hal yang berkaitan dengan data konsultasi siswa.
-                    <br> Untuk menambah data konsultasi siswa, silahkan klik tombol dibawah ini.
+                    Halaman ini dirancang sebagai sarana bagi siswa untuk melakukan konsultasi secara langsung dengan guru Bimbingan Konseling (BK). Melalui halaman ini, siswa dapat menyampaikan berbagai keluhan,<br>
+                    permasalahan pribadi, atau kendala yang dihadapi selama proses belajar maupun kehidupan sehari-hari di sekolah. Fitur konsultasi ini bertujuan untuk memberikan ruang komunikasi <br>
+                    yang aman dan nyaman, sehingga siswa dapat memperoleh bimbingan, solusi, serta dukungan dari guru BK secara efektif dan terarah.
                   </p>
                 </div>
               </div>
               <p class="text-gray-600 dark:text-gray-400">
-               <b> <i> <b class="font-bold text-red-700">!</b> Untuk mengedit dan menghapus data jenis pelanggaran dapat dilakukan di table bagian action. </i> </b>
+               <b> <i> <b class="font-bold text-red-700">!</b> Guanakan halaman ini dengan sebijak mungkin, privasi kalian terjaga.</i> </b>
               </p>
             </div>
             <div>
               <button
                 @click="openModal"
-                class="px-4 py-2 text-sm font-medium leading-5 w-full text-white font-2xl text-center h-17 font-bold transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                class="px-4 py-2 text-sm font-medium leading-5 w-full text-white font-2xl text-center h-17 font-bold transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
               >
-                Tambahkan data Konsultasi Siswa
+                Kirim konsultasi
               </button>
             </div>
           </div>
@@ -130,47 +243,120 @@
             class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300"
           >
             Tambah Data Konsultasi
-          </p>
-          <!-- Modal description -->
-          <form action="proses/proses_tambah_konsultasi.php" method="post">
-            <input
-            name="nama_siswa"
-              type="text"
-              class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Nama Siswa"
-            />
-            <textarea
-            name="keluhan"
-            id="keluhan"
-              rows="4"
-              class="block mb-4 mt-4 h-33 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Keluhan"
-            ></textarea>
+          </p>          <!-- Modal description -->          
+          <form id="konsultasiForm" onsubmit="sendWhatsApp(event)">
+               <div class="mb-4">
+                   <label for="nama" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-2">
+                       Nama Lengkap
+                   </label>                   
+                   <div class="relative">
+                       <input 
+                       type="text" 
+                       name="nama" 
+                       id="nama" 
+                       class="custom-input" 
+                       placeholder="Masukkan nama lengkap Anda..." 
+                       required>
+                   </div>
+               </div>
+            <div class="mb-4">
+                <label for="keluhan" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-2">
+                    Keluhan / Konsultasi
+                </label>
+                <textarea
+                name="keluhan"
+                id="keluhan"
+                rows="4"
+                class="block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="Tuliskan keluhan atau hal yang ingin dikonsultasikan..."
+                required
+                ></textarea>
+            </div>
             <footer
           class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
         >
-          <button
+          <button type="button"
             @click="closeModal"
             class="w-full px-5 py-5 text-sm font-medium leading-5 text-white text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 sm:px-4 sm:py-2 sm:w-auto active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray"
           >
             Cancel
-          </button>
-          <button
-            class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-          >
-            Tambah
+          </button>          
+          
+          <button type="submit"
+            class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-green"
+            >
+            <div class="flex items-center justify-center">
+              <span class="mr-2">Kirim ke WhatsApp</span>
+              <svg class="w-5 h-5 inline" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2a10 10 0 0 1 7.092 17.034l.93 2.726a1 1 0 0 1-1.234 1.234l-2.726-.93A10 10 0 1 1 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm-3.6 5.9a.2.2 0 0 1 .2-.2h7.2a.2.2 0 0 1 .2.2v6.2a.2.2 0 0 1-.2.2h-7.2a.2.2 0 0 1-.2-.2V9.9z"/>
+              </svg>
+            </div>
           </button>
         </footer>
           </form>
+
         </div>
-        
       </div>
     </div>
-          </div>
-        </div>
-      </main>
-    </div>
   </div>
-</body>
+</main>
+</div>
+</div>
 
+<script>
+function sendWhatsApp(event) {
+    event.preventDefault();
+    
+    const nama = document.getElementById('nama').value;
+    const keluhan = document.getElementById('keluhan').value;
+    
+    // Format pesan
+    const text = `Assalamualaikum Halo Pak/Bu Saya *${nama}* Keluahan saya adalah *${keluhan}* terimakasih sudah membaca pesan ini`;
+    
+    // Buat URL WhatsApp
+    const url = `https://api.whatsapp.com/send?phone=6282241643645&text=${encodeURIComponent(text)}`;
+    
+    // Redirect ke WhatsApp
+    window.open(url, '_blank');
+    
+    // Reset form dan tutup modal
+    document.getElementById('konsultasiForm').reset();
+    closeModal();
+}
+$(document).ready(function() {
+    $("#nama_siswa").autocomplete({
+        source: "get_siswa_autocomplete.php",
+        minLength: 1,
+        delay: 300,
+        select: function(event, ui) {
+            event.preventDefault();
+            $("#nama_siswa").val(ui.item.label);
+            $("#siswa_id").val(ui.item.id);
+            return false;
+        },
+        response: function(event, ui) {
+            if (!ui.content.length) {
+                var noResult = { label: "Tidak ada siswa yang ditemukan", value: "" };
+                ui.content.push(noResult);
+            }
+        },
+        open: function(event, ui) {
+            $('.ui-autocomplete').css('z-index', 9999); // Memastikan dropdown muncul di atas modal
+        }
+    }).autocomplete("instance")._renderItem = function(ul, item) {
+        return $("<li>")
+            .append("<div class='p-2'>" + item.label + "</div>")
+            .appendTo(ul);
+    };
+
+    // Tambahkan event untuk memastikan input tidak kosong
+    $("#siswa_id").on('blur', function() {
+        if($(this).val().trim() === '') {
+            $(this).val('');
+        }
+    });
+});
+</script>
+
+</body>
 </html>
