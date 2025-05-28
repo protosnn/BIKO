@@ -18,47 +18,12 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-    defer></script>
-  <script src="../assets/js/charts-lines.js" defer></script>
+    defer></script>  <script src="../assets/js/charts-lines.js" defer></script>
   <script src="../assets/js/charts-pie.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- jQuery UI -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+      
       <style>
-        .ui-autocomplete {
-            max-height: 200px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            z-index: 9999 !important;
-            background: white;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06);
-        }
-        .ui-menu-item {
-            padding: 0.75rem 1rem;
-            font-size: 0.875rem;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-            transition: all 0.2s ease;
-        }
-        .ui-menu-item:last-child {
-            border-bottom: none;
-        }
-        .ui-menu-item:hover {
-            background-color: rgba(59, 130, 246, 0.05);
-            cursor: pointer;
-        }
-        .ui-state-active,
-        .ui-widget-content .ui-state-active {
-            background: linear-gradient(to right, #2563eb, #3b82f6) !important;
-            border: none !important;
-            color: white !important;
-        }
-        .ui-helper-hidden-accessible {
-            display: none;
-        }
         /* Custom input styling */
         .custom-input {
             background-color: solid gray;
@@ -243,8 +208,7 @@
             class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300"
           >
             Tambah Data Konsultasi
-          </p>          <!-- Modal description -->          
-          <form id="konsultasiForm" onsubmit="sendWhatsApp(event)">
+          </p>          <!-- Modal description -->            <form id="konsultasiForm" onsubmit="sendWhatsApp(event)">
                <div class="mb-4">
                    <label for="nama" class="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-2">
                        Nama Lengkap
@@ -252,9 +216,9 @@
                    <div class="relative">
                        <input 
                        type="text" 
-                       name="nama" 
+                       name="nama_siswa" 
                        id="nama" 
-                       class="custom-input" 
+                       class="block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" 
                        placeholder="Masukkan nama lengkap Anda..." 
                        required>
                    </div>
@@ -311,51 +275,69 @@ function sendWhatsApp(event) {
     const keluhan = document.getElementById('keluhan').value;
     
     // Format pesan
-    const text = `Assalamualaikum Halo Pak/Bu Saya *${nama}* Keluahan saya adalah *${keluhan}* terimakasih sudah membaca pesan ini`;
-    
-    // Buat URL WhatsApp
-    const url = `https://api.whatsapp.com/send?phone=6282241643645&text=${encodeURIComponent(text)}`;
-    
-    // Redirect ke WhatsApp
-    window.open(url, '_blank');
-    
-    // Reset form dan tutup modal
-    document.getElementById('konsultasiForm').reset();
-    closeModal();
-}
-$(document).ready(function() {
-    $("#nama_siswa").autocomplete({
-        source: "get_siswa_autocomplete.php",
-        minLength: 1,
-        delay: 300,
-        select: function(event, ui) {
-            event.preventDefault();
-            $("#nama_siswa").val(ui.item.label);
-            $("#siswa_id").val(ui.item.id);
-            return false;
-        },
-        response: function(event, ui) {
-            if (!ui.content.length) {
-                var noResult = { label: "Tidak ada siswa yang ditemukan", value: "" };
-                ui.content.push(noResult);
-            }
-        },
-        open: function(event, ui) {
-            $('.ui-autocomplete').css('z-index', 9999); // Memastikan dropdown muncul di atas modal
-        }
-    }).autocomplete("instance")._renderItem = function(ul, item) {
-        return $("<li>")
-            .append("<div class='p-2'>" + item.label + "</div>")
-            .appendTo(ul);
-    };
+    const text = `Assalamualaikum Pak/Bu,\n\nSaya *${nama}*\nKeluhan saya: \n*${keluhan}*\n\nTerimakasih.`;
 
-    // Tambahkan event untuk memastikan input tidak kosong
-    $("#siswa_id").on('blur', function() {
-        if($(this).val().trim() === '') {
-            $(this).val('');
+    // Tampilkan konfirmasi Sweet Alert
+    Swal.fire({
+        title: 'Konfirmasi Pengiriman',
+        html: `
+            <div class="text-left">
+                <p class="mb-2"><strong>Nama:</strong> ${nama}</p>
+                <p class="mb-2"><strong>Keluhan:</strong></p>
+                <p class="text-gray-600">${keluhan}</p>
+            </div>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Kirim!',
+        cancelButtonText: 'Batal',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Kirim ke database
+            fetch('../proses_siswa/proses_tambah_konsultasi.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `nama_siswa=${encodeURIComponent(nama)}&keluhan=${encodeURIComponent(keluhan)}`
+            })
+            .then(response => response.text())
+            .then(response => {
+                if (response === "success") {
+                    // Jika berhasil, tampilkan notifikasi sukses
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data konsultasi berhasil disimpan',
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Lanjutkan ke WhatsApp'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Buka WhatsApp
+                            const url = `https://api.whatsapp.com/send?phone=6282241643645&text=${encodeURIComponent(text)}`;
+                            window.open(url, '_blank');
+                            
+                            // Reset form dan tutup modal
+                            document.getElementById('konsultasiForm').reset();
+                            closeModal();
+                        }
+                    });
+                } else {
+                    // Jika gagal, tampilkan pesan error
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Gagal menyimpan data konsultasi',
+                        icon: 'error',
+                        confirmButtonColor: '#d33'
+                    });
+                }
+            });
         }
     });
-});
+}
 </script>
 
 </body>
