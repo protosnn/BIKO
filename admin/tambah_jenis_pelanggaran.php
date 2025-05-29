@@ -8,20 +8,20 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
+  <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
   <script
     src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
     defer></script>
-  <script src="./assets/js/init-alpine.js"></script>
+  <script src="../assets/js/init-alpine.js"></script>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
     defer></script>
-  <script src="./assets/js/charts-lines.js" defer></script>
-  <script src="./assets/js/charts-pie.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="../assets/js/charts-lines.js" defer></script>
+  <script src="../assets/js/charts-pie.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
@@ -29,19 +29,19 @@
     class="flex h-screen bg-gray-50 dark:bg-gray-900"
     :class="{ 'overflow-hidden': isSideMenuOpen }">
     <!-- Desktop & Mobile sidebar -->
-    <?php include 'sidebar.php'; ?>
+    <?php include '../sidebar.php'; ?>
     <div class="flex flex-col flex-1 w-full">
       <!-- Header -->
-      <?php include 'header.php'; ?>
+      <?php include '../header.php'; ?>
       <main class="h-full overflow-y-auto">
         <div class="container px-6 mx-auto grid">
           <h2
             class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Data Konsultasi Siswa 
+            Data Jenis Pelanggaran 
           </h2>
           <!-- Modal -->
           <div class="gap-6 mb-8 "> 
-<div>
+          <div>
             <div
               class="w-full px-4 py-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
             >
@@ -52,19 +52,20 @@
                 <figure class="w-full h-full">
                   <div
                     alt="change to a img tag"
-                    class="bg-blue-500 text-neutral-50 min-h-full rounded-lg border border-opacity-5"
+                    class="bg-yellow-500 text-neutral-50 min-h-full rounded-lg border border-opacity-5"
                   ></div>
                 </figure>
                 <div class="absolute text-neutral-50 bottom-4 left-0 px-4">
-                  <span class="font-bold">Tambahkan Data Konsultasi Siswa</span>
+                  <span class="font-bold">Tambahkan Data Jenis Pelanggaran</span>
                   <p class="text-sm opacity-60 line-clamp-2">
-                     Halaman ini digunakan untuk mngatur segala hal yang berkaitan dengan data konsultasi siswa.
-                    <br> Untuk menambah data konsultasi siswa, silahkan klik tombol dibawah ini.
+                    Untuk menambahkan data jenis pelanggaran baru yang akan digunakan untuk keperluan semuanya, dan ditampilkan di table di bawah ini
                   </p>
                 </div>
               </div>
+
+
               <p class="text-gray-600 dark:text-gray-400">
-               <b> <i> <b class="font-bold text-red-700">!</b> Untuk mengedit dan menghapus data jenis pelanggaran dapat dilakukan di table bagian action. </i> </b>
+               <b> <i> Untuk mengedit dan menghapus data jenis pelanggaran dapat dilakukan di table bagian action. </i> </b>
               </p>
             </div>
             <div>
@@ -72,7 +73,7 @@
                 @click="openModal"
                 class="px-4 py-2 text-sm font-medium leading-5 w-full text-white font-2xl text-center h-17 font-bold transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
               >
-                Tambahkan data Konsultasi Siswa
+                Tambahkan data jenis pelanggaran
               </button>
             </div>
           </div>
@@ -129,23 +130,31 @@
           <p
             class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300"
           >
-            Tambah Data Konsultasi
+            Tambah Data Jenis Pelanggaran
           </p>
           <!-- Modal description -->
-          <form action="proses/proses_tambah_konsultasi.php" method="post">
+          <form action="proses/proses_tambah_jenispelanggaran.php" method="post">
             <input
-            name="nama_siswa"
+              name="nama"
               type="text"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Nama Siswa"
+              placeholder="Masukan Nama Pelanggaran"
             />
-            <textarea
-            name="keluhan"
-            id="keluhan"
-              rows="4"
-              class="block mb-4 mt-4 h-33 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Keluhan"
-            ></textarea>
+            <input
+              name="poin"
+              type="number"
+              class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              placeholder="Masukan Poin"
+            />
+            <select
+                  name="status"
+                  class="block mb-4 w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                >
+                  <option disabled>Status Pelanggaran</option>
+                  <option value="ringan">Ringan</option>
+                  <option value="sedang">Sedang</option>
+                  <option value="berat">Berat</option>
+                </select>
             <footer
           class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
         >

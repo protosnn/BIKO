@@ -8,19 +8,19 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
+  <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
   <script
     src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
     defer></script>
-  <script src="./assets/js/init-alpine.js"></script>
+  <script src="../assets/js/init-alpine.js"></script>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-    defer></script>
-  <script src="./assets/js/charts-lines.js" defer></script>
-  <script src="./assets/js/charts-pie.js" defer></script>
+    defer></script>  <script src="../assets/js/charts-lines.js" defer></script>
+  <script src="../assets/js/charts-pie.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
@@ -29,10 +29,10 @@
     class="flex h-screen bg-gray-50 dark:bg-gray-900"
     :class="{ 'overflow-hidden': isSideMenuOpen }">
     <!-- Desktop & Mobile sidebar -->
-    <?php include 'sidebar.php'; ?>
+    <?php include '../sidebar.php'; ?>
     <div class="flex flex-col flex-1 w-full">
       <!-- Header -->
-      <?php include 'header.php'; ?>
+      <?php include '../header.php'; ?>
       <main class="h-full overflow-y-auto">
         <div class="container px-6 mx-auto grid">
           <h2
@@ -132,51 +132,78 @@
           >
             Tambah Data laporan Pelanggaran
           </p>
-          <!-- Modal description -->
-          <form action="proses/proses_tambah_pelanggaran.php" method="post">
+          <!-- Modal description -->          <form id="laporanForm" onsubmit="submitLaporan(event)">
             <select
-                  name="nama_siswa"  
+                  name="nama_siswa" 
+                  id="nama_siswa" 
                   class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  required
                 >
-                  <option disabled><strong>Nama Siswa</strong></option>
+                  <option value="" disabled selected>Pilih Nama Siswa</option>
                   <?php
-                  include 'koneksi.php';
-                  $query = mysqli_query($db, "SELECT * FROM siswa");
-                  while ($data = mysqli_fetch_array($query)) {
-                    echo "<option value='" . $data['siswa_id'] . "'>" . $data['nama'] . "</option>";
+                  include '../koneksi.php';
+                  $query = "SELECT id, nama FROM siswa";
+                  $result = mysqli_query($db, $query);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<option value='" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['nama']) . "</option>";
                   }
                   ?>
                 </select>
             <input
               type="text"
               name="pelapor"
+              id="pelapor"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Jika berkenan masukan nama jika tidak ketik anonymous"/>
-            <input
-              name="jenis_pelanggaran"
-              type="text"
-              class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Pelanggaran yang dilakukan"
+              placeholder="Masukkan nama pelapor"
+              value="Admin BK"
+              required
             />
+            <select
+                  name="jenis_pelanggaran"
+                  id="jenis_pelanggaran"
+                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  required
+                >
+                  <option value="" disabled selected>Pilih Jenis Pelanggaran</option>
+                  <?php
+                  $query = "SELECT id, nama FROM jenis_pelanggaran";
+                  $result = mysqli_query($db, $query);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<option value='" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['nama']) . "</option>";
+                  }
+                  ?>
+                </select>
             <input
               name="bukti"
+              id="bukti"
               type="file"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan bukti"
+              required
             />
+            <textarea
+              name="keterangan"
+              id="keterangan"
+              rows="3"
+              class="block w-full mb-4 mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-textarea"
+              placeholder="Tambahkan keterangan atau detail pelanggaran..."
+              required
+            ></textarea>
             <footer
           class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
-        >
-          <button
+        >          <button type="button"
             @click="closeModal"
             class="w-full px-5 py-5 text-sm font-medium leading-5 text-white text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 sm:px-4 sm:py-2 sm:w-auto active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray"
           >
-            Cancel
+            Batal
           </button>
-          <button
+          <button type="submit"
             class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
           >
-            Tambah
+            <span class="mr-2">Tambah Pelanggaran</span>
+            <svg class="w-5 h-5 inline" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+            </svg>
           </button>
         </footer>
           </form>
@@ -189,6 +216,99 @@
       </main>
     </div>
   </div>
+  <script>    
+    function submitLaporan(event) {
+        event.preventDefault();
+        
+        const siswaSelect = document.getElementById('nama_siswa');
+        const siswaId = siswaSelect.value;
+        const siswaName = siswaSelect.options[siswaSelect.selectedIndex].text;
+        const pelapor = document.getElementById('pelapor').value;
+        const jenisPelanggaranSelect = document.getElementById('jenis_pelanggaran');
+        const jenisPelanggaran = jenisPelanggaranSelect.options[jenisPelanggaranSelect.selectedIndex].text;
+        const buktiFile = document.getElementById('bukti').files[0];
+        const keterangan = document.getElementById('keterangan').value;
+
+        // Create FormData object
+        const formData = new FormData();
+        formData.append('siswa_id', siswaId);
+        formData.append('pelapor', pelapor);
+        formData.append('jenis_pelanggaran_id', jenisPelanggaranSelect.value);
+        formData.append('bukti', buktiFile);
+        formData.append('keterangan', keterangan);
+
+        // Show confirmation dialog
+        Swal.fire({
+            title: 'Konfirmasi Laporan',
+            html: `
+                <div class="text-left">
+                    <p class="mb-2"><strong>Nama Siswa:</strong> ${siswaName}</p>
+                    <p class="mb-2"><strong>Pelapor:</strong> ${pelapor}</p>
+                    <p class="mb-2"><strong>Jenis Pelanggaran:</strong> ${jenisPelanggaran}</p>
+                    <p class="mb-2"><strong>Bukti:</strong> ${buktiFile.name}</p>
+                    <p class="mb-2"><strong>Keterangan:</strong> ${keterangan}</p>
+                </div>
+            `,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#7e3af2',
+            cancelButtonColor: '#9ca3af',
+            confirmButtonText: 'Ya, Tambahkan!',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Send to server
+                fetch('../proses_siswa/proses_tambah_pelanggaran.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Server response:', data);
+                    if (data.status === 'success') {
+                        // Show success message
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: 'Laporan pelanggaran berhasil disimpan',
+                            icon: 'success',
+                            confirmButtonColor: '#7e3af2'
+                        }).then(() => {
+                            // Reset form dan tutup modal
+                            document.getElementById('laporanForm').reset();
+                            closeModal();
+                            
+                            // Refresh halaman
+                            location.reload();
+                        });
+                    } else {
+                        // Show error message
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: data.message || 'Gagal menyimpan laporan pelanggaran',
+                            icon: 'error',
+                            confirmButtonColor: '#7e3af2'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan saat mengirim laporan',
+                        icon: 'error',
+                        confirmButtonColor: '#7e3af2'
+                    });
+                });
+            }
+        });
+    }
+  </script>
 </body>
 
 </html>

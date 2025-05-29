@@ -8,20 +8,21 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
+  <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
   <script
     src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
     defer></script>
-  <script src="./assets/js/init-alpine.js"></script>
+  <script src="../assets/js/init-alpine.js"></script>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
     defer></script>
-  <script src="./assets/js/charts-lines.js" defer></script>
-  <script src="./assets/js/charts-pie.js" defer></script>
+  <script src="../assets/js/charts-lines.js" defer></script>
+  <script src="../assets/js/charts-pie.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
 
 <body>
@@ -29,15 +30,15 @@
     class="flex h-screen bg-gray-50 dark:bg-gray-900"
     :class="{ 'overflow-hidden': isSideMenuOpen }">
     <!-- Desktop & Mobile sidebar -->
-    <?php include 'sidebar.php'; ?>
+    <?php include '../sidebar.php'; ?>
     <div class="flex flex-col flex-1 w-full">
       <!-- Header -->
-      <?php include 'header.php'; ?>
+      <?php include '../header.php'; ?>
       <main class="h-full overflow-y-auto">
         <div class="container px-6 mx-auto grid">
           <h2
             class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Data Jenis Pelanggaran 
+            Data Konseler 
           </h2>
           <!-- Modal -->
           <div class="gap-6 mb-8 "> 
@@ -52,7 +53,7 @@
                 <figure class="w-full h-full">
                   <div
                     alt="change to a img tag"
-                    class="bg-yellow-500 text-neutral-50 min-h-full rounded-lg border border-opacity-5"
+                    class="bg-orange-500 text-neutral-50 min-h-full rounded-lg border border-opacity-5"
                   ></div>
                 </figure>
                 <div class="absolute text-neutral-50 bottom-4 left-0 px-4">
@@ -76,6 +77,7 @@
                 Tambahkan data jenis pelanggaran
               </button>
             </div>
+          </div>
           </div>
           <div
       x-show="isModalOpen"
@@ -130,31 +132,31 @@
           <p
             class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300"
           >
-            Tambah Data Jenis Pelanggaran
+            Tambah Data Konseler
           </p>
           <!-- Modal description -->
-          <form action="proses/proses_tambah_jenispelanggaran.php" method="post">
+          <form action="proses_tambah_konseler" method="post">
             <input
-              name="nama"
+            name="nama"
+            id="nama"
               type="text"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Nama Pelanggaran"
+              placeholder="Masukan Nama Konseler"
             />
             <input
-              name="poin"
-              type="number"
+            name="username"
+            id="username"
+              type="text"
               class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Masukan Poin"
+              placeholder="Masukan Username"
             />
-            <select
-                  name="status"
-                  class="block mb-4 w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                >
-                  <option disabled>Status Pelanggaran</option>
-                  <option value="ringan">Ringan</option>
-                  <option value="sedang">Sedang</option>
-                  <option value="berat">Berat</option>
-                </select>
+            <input
+            name="password"
+            id="password"
+              type="password"
+              class="block mb-4 mt-4 w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              placeholder="Masukan password"
+            />
             <footer
           class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
         >
