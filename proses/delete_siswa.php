@@ -1,9 +1,9 @@
 <?php
-include '../koneksi.php';
+require_once('../koneksi.php');
 
 header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $id = $_POST['id'];
     
     $query = "DELETE FROM siswa WHERE id = ?";
@@ -15,11 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Gagal menghapus data: ' . mysqli_error($db)]);
     }
-
-    mysqli_stmt_close($stmt);
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
 }
-
-mysqli_close($db);
 ?>

@@ -1,8 +1,8 @@
 <?php
 session_start();
 // Check if student is already logged in
-if (isset($_SESSION['siswa_id'])) {
-    header("Location: siswa/dashboard_siswa.php");
+if (isset($_SESSION['admin_id'])) {
+    header("Location: dashboard.php");
     exit();
 }
 ?>
@@ -11,7 +11,7 @@ if (isset($_SESSION['siswa_id'])) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Siswa | BIKOO</title>
+    <title>Login Admin | BIKOO</title>  
     <link rel="icon" href="{{asset('images/logo.jpg')}}" type="image/x-icon">
     <link href="output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,7 +22,7 @@ if (isset($_SESSION['siswa_id'])) {
         <div class="flex flex-col overflow-y-auto md:flex-row">
           <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
-              <h1 class="mb-4 text-2xl font-bold text-purple-700 text-center">Login Siswa</h1>
+              <h1 class="mb-4 text-2xl font-bold text-purple-700 text-center">Login Admin</h1>
               <?php if(isset($_SESSION['error'])): ?>
                 <div class="mb-4 text-sm text-red-600 bg-red-100 p-3 rounded">
                     <?php 
@@ -31,7 +31,7 @@ if (isset($_SESSION['siswa_id'])) {
                     ?>
                 </div>
               <?php endif; ?>
-              <form action="proses_login.php" method="post" autocomplete="off">
+              <form action="proses_login_admin.php" method="post" autocomplete="off">
                 <label class="block text-sm mb-4">
                   <span class="text-gray-700 font-semibold">Username</span>
                   <input
@@ -55,12 +55,12 @@ if (isset($_SESSION['siswa_id'])) {
                   class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" value="Masuk">
               </form>
               <p class="mt-4 text-sm text-center text-gray-600">
-                <a href="admin/login.php" class="text-purple-600 hover:underline">Login sebagai Admin</a>
+                <a href="admin/login.php" class="text-purple-600 hover:underline">Login sebagai Siswa</a>
               </p>
             </div>
           </div>
           <div class="hidden md:flex items-center justify-center bg-gradient-to-br from-purple-100 to-purple-300 md:w-1/2">
-            <img src="assets/img/login-office.jpeg" alt="Login Illustration" class="w-3/4 rounded-lg shadow-lg" />
+            <img src="../assets/img/login-office.jpeg" alt="Login Illustration" class="w-3/4 rounded-lg shadow-lg" />
           </div>
         </div>
       </div>

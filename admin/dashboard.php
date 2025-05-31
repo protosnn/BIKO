@@ -1,7 +1,6 @@
 <?php
-// Include database connection
-include '../koneksi.php';
-
+require_once '../koneksi.php';
+require_once 'cek_login.php'; 
 // Query untuk menghitung jumlah siswa
 $query_siswa = "SELECT COUNT(*) as total_siswa FROM siswa";
 $result_siswa = mysqli_query($db, $query_siswa);
@@ -26,11 +25,10 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
 ?>
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Windmill Dashboard</title>
+  <title>Dashboard Admin | BIKOO</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
@@ -39,6 +37,7 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
     src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
     defer></script>
   <script src="../assets/js/init-alpine.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
@@ -240,15 +239,16 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
             <!-- Add JavaScript for handling edit and delete -->
             <script>
               // Function to open edit modal with data
-              function openEditModal(id, nama, nisn, kelas, jenis_kelamin) {
+              function openEditModal(id, nama, username, kelas, jkel) {
                 document.getElementById('edit_id').value = id;
                 document.getElementById('edit_nama').value = nama;
-                document.getElementById('edit_nisn').value = nisn;
+                document.getElementById('edit_nisn').value = username;
                 document.getElementById('edit_kelas').value = kelas;
-                document.getElementById('edit_jenis_kelamin').value = jenis_kelamin;
+                document.getElementById('edit_jenis_kelamin').value = jkel;
                 
-                // Use Alpine.js to open modal
-                document.querySelector('[x-data]').__x.$data.isModalOpen = true;
+                // Buka modal menggunakan Alpine.js
+                const modal = document.querySelector('[x-data]').__x.$data;
+                modal.isModalOpen = true;
               }
 
               // Function to update siswa data
@@ -262,21 +262,19 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
                 .then(response => response.json())
                 .then(data => {
                   if (data.status === 'success') {
-                    // Show success message using SweetAlert2
                     Swal.fire({
+                      icon: 'success',
                       title: 'Berhasil!',
                       text: 'Data siswa berhasil diperbarui',
-                      icon: 'success',
                       confirmButtonColor: '#7e3af2'
                     }).then(() => {
-                      // Refresh the page
                       location.reload();
                     });
                   } else {
                     Swal.fire({
+                      icon: 'error',
                       title: 'Gagal!',
                       text: data.message || 'Terjadi kesalahan saat memperbarui data',
-                      icon: 'error',
                       confirmButtonColor: '#7e3af2'
                     });
                   }
@@ -284,9 +282,9 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
                 .catch(error => {
                   console.error('Error:', error);
                   Swal.fire({
-                    title: 'Error!',
-                    text: 'Terjadi kesalahan saat menghubungi server',
                     icon: 'error',
+                    title: 'Error!',
+                    text: 'Terjadi kesalahan pada server',
                     confirmButtonColor: '#7e3af2'
                   });
                 });
@@ -300,7 +298,7 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
                   icon: 'warning',
                   showCancelButton: true,
                   confirmButtonColor: '#7e3af2',
-                  cancelButtonColor: '#9ca3af',
+                  cancelButtonColor: '#d33',
                   confirmButtonText: 'Ya, hapus!',
                   cancelButtonText: 'Batal'
                 }).then((result) => {
@@ -310,24 +308,24 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
                       headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                       },
-                      body: `id=${id}`
+                      body: 'id=' + id
                     })
                     .then(response => response.json())
                     .then(data => {
                       if (data.status === 'success') {
                         Swal.fire({
+                          icon: 'success',
                           title: 'Terhapus!',
                           text: 'Data siswa berhasil dihapus',
-                          icon: 'success',
                           confirmButtonColor: '#7e3af2'
                         }).then(() => {
                           location.reload();
                         });
                       } else {
                         Swal.fire({
+                          icon: 'error',
                           title: 'Gagal!',
                           text: data.message || 'Gagal menghapus data siswa',
-                          icon: 'error',
                           confirmButtonColor: '#7e3af2'
                         });
                       }
@@ -335,9 +333,9 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
                     .catch(error => {
                       console.error('Error:', error);
                       Swal.fire({
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan saat menghubungi server',
                         icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan pada server',
                         confirmButtonColor: '#7e3af2'
                       });
                     });
@@ -382,6 +380,108 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
       </main>
     </div>
   </div>
-</body>
+  <script>
+    function openEditModal(id, nama, username, kelas, jkel) {
+      document.getElementById('edit_id').value = id;
+      document.getElementById('edit_nama').value = nama;
+      document.getElementById('edit_nisn').value = username;
+      document.getElementById('edit_kelas').value = kelas;
+      document.getElementById('edit_jenis_kelamin').value = jkel;
+      
+      // Buka modal menggunakan Alpine.js
+      const modal = document.querySelector('[x-data]').__x.$data;
+      modal.isModalOpen = true;
+    }
 
+    function updateSiswa() {
+      const formData = new FormData(document.getElementById('editForm'));
+      
+      fetch('../proses/update_siswa.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: 'Data siswa berhasil diperbarui',
+            confirmButtonColor: '#7e3af2'
+          }).then(() => {
+            location.reload();
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: data.message || 'Terjadi kesalahan saat memperbarui data',
+            confirmButtonColor: '#7e3af2'
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Terjadi kesalahan pada server',
+          confirmButtonColor: '#7e3af2'
+        });
+      });
+    }
+
+    function deleteSiswa(id) {
+      Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Data yang dihapus tidak dapat dikembalikan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#7e3af2',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch('../proses/delete_siswa.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'id=' + id
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'success') {
+              Swal.fire({
+                icon: 'success',
+                title: 'Terhapus!',
+                text: 'Data siswa berhasil dihapus',
+                confirmButtonColor: '#7e3af2'
+              }).then(() => {
+                location.reload();
+              });
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: data.message || 'Gagal menghapus data siswa',
+                confirmButtonColor: '#7e3af2'
+              });
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: 'Terjadi kesalahan pada server',
+              confirmButtonColor: '#7e3af2'
+            });
+          });
+        }
+      });
+    }
+  </script>
+</body>
 </html>

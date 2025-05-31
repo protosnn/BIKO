@@ -117,7 +117,7 @@
                 @click="openModal"
                 class="px-4 py-2 text-sm font-medium leading-5 w-full text-white font-2xl text-center h-17 font-bold transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-800 focus:outline-none focus:shadow-outline-red"
               >
-                Tambahkan data laporan pelanggaran
+              Laporkan pelanggaran
               </button>
             </div>
           </div>
@@ -174,7 +174,7 @@
           <p
             class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300"
           >
-            Tambah Data laporan Pelanggaran
+            Laporkan Pelanggaran
           </p>          <!-- Modal description -->
           <form id="laporanForm" onsubmit="submitLaporan(event)">
             <select
@@ -271,19 +271,23 @@ function submitLaporan(event) {
     const buktiFile = document.getElementById('bukti').files[0];
     const keterangan = document.getElementById('keterangan').value;
     
-    // Format pesan WA
-    const waMessage = `Assalamualaikum Pak/Bu,
+ // Format pesan WA
+    const waMessage =
+          
+      `Assalamualaikum Pak/Bu,
 
-*LAPORAN PELANGGARAN SISWA*
-Nama Siswa: *${siswaName}*
-Jenis Pelanggaran: *${jenisPelanggaran}*
-Dilaporkan oleh: ${pelapor}
+      *LAPORAN PELANGGARAN SISWA*
+      Nama Siswa: *${siswaName}*
+      Jenis Pelanggaran: *${jenisPelanggaran}*
+      Dilaporkan oleh: ${pelapor}
 
-Keterangan:
-_${keterangan}_
+      Keterangan:
+      _${keterangan}_
 
-Mohon untuk segera ditindaklanjuti.
-Terimakasih.`;    // Create FormData object to handle file upload
+      Mohon untuk segera ditindaklanjuti.
+      Terimakasih.`;   
+
+// Create FormData object to handle file upload
     const formData = new FormData();
     formData.append('siswa_id', siswaId);
     formData.append('pelapor', pelapor);
