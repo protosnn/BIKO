@@ -105,23 +105,29 @@
           <!-- Modal -->
           <div class="gap-6 mb-8 ">
             <div>
+              
+            </div> 
+          <div>
+            <div
+              class="w-full px-4 py-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
+            >
+              <!-- From Uiverse.io by Javierrocadev --> 
               <div
-                class="w-full px-4 py-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <!-- From Uiverse.io by Javierrocadev -->
-                <div
-                  class="relative rounded-lg w-full mb-2 -skew-x-6 -translate-y-2 -translate-y-6 hover:-translate-y-1 hover:-translate-x-0 hover:skew-x-0 duration-500 w-72 h-44 p-2 bg-neutral-50 card-compact hover:bg-base-200 transition-all duration-200 [box-shadow:12px_12px] hover:[box-shadow:4px_4px]">
-                  <figure class="w-full h-full">
-                    <div
-                      alt="change to a img tag"
-                      class="bg-red-800 text-neutral-50 min-h-full rounded-lg border border-opacity-5"></div>
-                  </figure>
-                  <div class="absolute text-neutral-50 bottom-4 left-0 px-4">
-                    <span class="font-bold">Tambahkan Data Laporan Pelanggaran</span>
-                    <p class="text-sm opacity-60 line-clamp-2">
-                      Halaman ini diperuntukan untuk mengatur semua data pelanggaran yang sudah dilakukan para siswa di sekolahan, untuk menambahkan data pelanggaran dapat menekan tombol di bawah
-                    </p>
-                  </div>
+                class="relative rounded-lg w-full mb-2 -skew-x-6 -translate-y-2 -translate-y-6 hover:-translate-y-1 hover:-translate-x-0 hover:skew-x-0 duration-500 w-72 h-44 p-2 bg-neutral-50 card-compact hover:bg-base-200 transition-all duration-200 [box-shadow:12px_12px] hover:[box-shadow:4px_4px]"
+                >
+                <figure class="w-full h-full">
+                  <div
+                    alt="change to a img tag"
+                    class="bg-yellow-500 text-neutral-50 min-h-full rounded-lg border border-opacity-5"
+                  ></div>
+                </figure>
+                <div class="absolute text-neutral-50 bottom-4 left-0 px-4">
+                  <span class="font-bold">Tambahkan Data Jenis Pelanggaran</span>
+                  <p class="text-sm opacity-60 line-clamp-2">
+                    Untuk menambahkan data jenis pelanggaran baru yang akan digunakan untuk keperluan semuanya, dan ditampilkan di table di bawah ini
+                  </p>
                 </div>
+              </div>
 
 
                 <p class="text-gray-600 dark:text-gray-400">
