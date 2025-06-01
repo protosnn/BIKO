@@ -11,8 +11,8 @@ $ortu=  $_POST['ortu'];
 $sql = mysqli_query($db, "insert into siswa values ('','$nama','$username','$password','$jkelamin','$kelas','$ortu')");
 
 if ($sql) {
-    echo "<script>alert('Data Berhasil Disimpan'); window.location = '../tambah_siswa.php';</script>";
+    echo "<script>alert('Data Berhasil Disimpan'); window.location = '../admin/tambah_siswa.php';</script>";
 } else {
-    echo "<script>alert('Data Gagal Disimpan'); window.location = '../tambah_siswa.php';</script>";
+    echo "<script>alert('Data Gagal Disimpan'); window.location = '../admin/tambah_siswa.php';</script>";
 }
 ?>

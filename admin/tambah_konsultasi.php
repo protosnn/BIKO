@@ -132,7 +132,7 @@
             Tambah Data Konsultasi
           </p>
           <!-- Modal description -->
-          <form action="proses/proses_tambah_konsultasi.php" method="post">
+          <form action="../proses/proses_tambah_konsultasi.php" method="post">
             <input
             name="nama_siswa"
               type="text"
@@ -172,7 +172,7 @@
           <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
             Data Konsultasi
           </h4>
-          <div class="w-full overflow-hidden rounded-lg shadow-xs">
+          <div class="w-full overflow-hidden rounded-lg shadow-xs mb-5">
             <div class="w-full overflow-x-auto">
               <table class="w-full whitespace-no-wrap">
                 <thead>                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -196,7 +196,7 @@
                           </div>
                         </div>
                       </td>
-                      <td class="px-4 py-3 text-sm"><?php echo htmlspecialchars($row['keluhan']); ?></td>
+                      <td class="px-4 py-3 text-sm text-wrap"><?php echo htmlspecialchars($row['keluhan']); ?></td>
                       <td class="px-4 py-3">
                         <div class="flex items-center space-x-4 text-sm">
                           <button
@@ -220,6 +220,7 @@
                         </div>
                       </td>
                     </tr>
+                  <?php endwhile; ?>
                 </tbody>
               </table>
             </div>
@@ -258,7 +259,7 @@
           })
           .then(response => response.json())
           .then(data => {
-            if (data.success) {
+            if (data.status === 'success') {
               Swal.fire({
                 icon: 'success',
                 title: 'Berhasil!',
