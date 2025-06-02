@@ -126,25 +126,6 @@
               <span class="ml-4">Konsultasi</span>
             </a>
           </li>
-          <li class="relative px-6 py-3">
-            <a
-              class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              href="tambah_konseler.php">
-              <svg
-                class="w-5 h-5"
-                aria-hidden="true"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-              <span class="ml-4">Konseler</span>
-            </a>
-          </li>
         </ul>
         <div class="px-6 my-6">
           <button
@@ -306,25 +287,6 @@
                   d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
               </svg>
               <span class="ml-4">konsultasi</span>
-            </a>
-          </li>
-          <li class="relative px-6 py-3">
-            <a
-              class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              href="tambah_konseler.php">
-              <svg
-                class="w-5 h-5"
-                aria-hidden="true"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-              <span class="ml-4">konseler</span>
             </a>
           </li>
         </ul>

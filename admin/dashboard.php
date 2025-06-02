@@ -19,6 +19,16 @@ $result_konsultasi = mysqli_query($db, $query_konsultasi);
 $row_konsultasi = mysqli_fetch_assoc($result_konsultasi);
 $total_konsultasi = $row_konsultasi['total_konsultasi'];
 
+// Query untuk menghitung pelanggaran berdasarkan status
+$query_status_pelanggaran = "SELECT jp.status, COUNT(*) as total FROM pelanggaran p 
+                            JOIN jenis_pelanggaran jp ON p.jenis_pelanggaran_id = jp.id 
+                            GROUP BY jp.status";
+$result_status_pelanggaran = mysqli_query($db, $query_status_pelanggaran);
+$pelanggaran_stats = array();
+while($row = mysqli_fetch_assoc($result_status_pelanggaran)) {
+    $pelanggaran_stats[$row['status']] = $row['total'];
+}
+
 // Query untuk mengambil data siswa terbaru
 $query_latest_siswa = "SELECT * FROM siswa ORDER BY id DESC LIMIT 10";
 $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
@@ -32,20 +42,10 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
-  <script
-    src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
-    defer></script>
+  <link rel="stylesheet" href="../assets/css/tailwind.output.css" />  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <script src="../assets/js/init-alpine.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-    defer></script>
-  <script src="../assets/js/charts-lines.js" defer></script>
-  <script src="../assets/js/charts-pie.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 
 <body>
@@ -184,7 +184,7 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
                     </tr>
                     <?php endwhile; ?>
                   </tbody>
-                </table>
+                </table>  
               </div>
             </div>
 
@@ -345,33 +345,33 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
             </script>
           <!-- Charts -->
           <h2
-            class="my-6 text-2xl font-semibold p text-gray-700 dark:text-gray-200">
+            class="my-6 text-2xl font-semibold mt-8 text-gray-700 dark:text-gray-200">
             Grafik
-          </h2>
-          <div class="grid gap-6 mb-8">
+          </h2>          
+          <div class="grid gap-6 mb-8 background-red dark:bg-red-500 rounded-lg shadow-xs">
             <div
-              class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+              class="min-w-0 p-4 bg-red rounded-lg shadow-xs dark:bg-gray-800">
               <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                Pelanggaran
+                Data Pelanggaran Berdasarkan Status
               </h4>
-              <canvas id="pie"></canvas>
+              <canvas id="pieChart"></canvas>
               <div
                 class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
                 <!-- Chart legend -->
                 <div class="flex items-center">
                   <span
-                    class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-                  <span>Siswa yang melakukan pelanggaran</span>
+                    class="inline-block w-3 h-3 mr-1 bg-red-500 rounded-full"></span>
+                  <span>Pelanggaran Berat</span>
                 </div>
                 <div class="flex items-center">
                   <span
-                    class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                  <span>Siswa tertib</span>
+                    class="inline-block w-3 h-3 mr-1 bg-yellow-500 rounded-full"></span>
+                  <span>Pelanggaran Sedang</span>
                 </div>
                 <div class="flex items-center">
                   <span
-                    class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                  <span>Siswa netral</span>
+                    class="inline-block w-3 h-3 mr-1 bg-green-500 rounded-full"></span>
+                  <span>Pelanggaran Ringan</span>
                 </div>
               </div>
             </div>
@@ -379,109 +379,38 @@ $result_latest_siswa = mysqli_query($db, $query_latest_siswa);
         </div>
       </main>
     </div>
-  </div>
-  <script>
-    function openEditModal(id, nama, username, kelas, jkel) {
-      document.getElementById('edit_id').value = id;
-      document.getElementById('edit_nama').value = nama;
-      document.getElementById('edit_nisn').value = username;
-      document.getElementById('edit_kelas').value = kelas;
-      document.getElementById('edit_jenis_kelamin').value = jkel;
-      
-      // Buka modal menggunakan Alpine.js
-      const modal = document.querySelector('[x-data]').__x.$data;
-      modal.isModalOpen = true;
-    }
-
-    function updateSiswa() {
-      const formData = new FormData(document.getElementById('editForm'));
-      
-      fetch('../proses/update_siswa.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'success') {
-          Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: 'Data siswa berhasil diperbarui',
-            confirmButtonColor: '#7e3af2'
-          }).then(() => {
-            location.reload();
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Gagal!',
-            text: data.message || 'Terjadi kesalahan saat memperbarui data',
-            confirmButtonColor: '#7e3af2'
-          });
+  </div>  <script>
+    // Get the context of the chart canvas element
+    const ctx = document.getElementById('pieChart').getContext('2d');
+    
+    // Create the pie chart
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Berat', 'Sedang', 'Ringan'],
+        datasets: [{
+          data: [
+            <?php echo isset($pelanggaran_stats['berat']) ? $pelanggaran_stats['berat'] : 0; ?>,
+            <?php echo isset($pelanggaran_stats['sedang']) ? $pelanggaran_stats['sedang'] : 0; ?>,
+            <?php echo isset($pelanggaran_stats['ringan']) ? $pelanggaran_stats['ringan'] : 0; ?>
+          ],
+          backgroundColor: ['#EF4444', '#F59E0B', '#10B981'], // red, yellow, green
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        animation: {
+          animateScale: true,
+          animateRotate: true
         }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error!',
-          text: 'Terjadi kesalahan pada server',
-          confirmButtonColor: '#7e3af2'
-        });
-      });
-    }
-
-    function deleteSiswa(id) {
-      Swal.fire({
-        title: 'Apakah Anda yakin?',
-        text: "Data yang dihapus tidak dapat dikembalikan!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#7e3af2',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, hapus!',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          fetch('../proses/delete_siswa.php', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'id=' + id
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.status === 'success') {
-              Swal.fire({
-                icon: 'success',
-                title: 'Terhapus!',
-                text: 'Data siswa berhasil dihapus',
-                confirmButtonColor: '#7e3af2'
-              }).then(() => {
-                location.reload();
-              });
-            } else {
-              Swal.fire({
-                icon: 'error',
-                title: 'Gagal!',
-                text: data.message || 'Gagal menghapus data siswa',
-                confirmButtonColor: '#7e3af2'
-              });
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            Swal.fire({
-              icon: 'error',
-              title: 'Error!',
-              text: 'Terjadi kesalahan pada server',
-              confirmButtonColor: '#7e3af2'
-            });
-          });
-        }
-      });
-    }
+      }
+    });
   </script>
 </body>
 </html>
